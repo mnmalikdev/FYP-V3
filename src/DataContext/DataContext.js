@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import React from 'react';
 
-const ip = '172.25.144.1';
+const ip = '192.168.10.2';
 var token = '';
 var userId = '';
 
@@ -14,7 +14,6 @@ const autoLogin = async props => {
       return false;
     } else {
       token = value;
-      console.log(token);
 
       return true;
     }
@@ -81,7 +80,6 @@ const signup = async props => {
       return false;
     }
   } catch (error) {
-    console.log('Error' + error);
     alert('Please Check your Details');
   }
 };
@@ -96,12 +94,10 @@ const predictBodyFat = async props => {
 
     return response.data;
   } catch (error) {
-    console.log('Error' + error);
     alert(error.message);
   }
 };
 const addCalories = async props => {
-  console.log(props);
   try {
     const response = await axios.post(
       `http://${ip}:3000/api/meal/addMeal`,
@@ -123,7 +119,6 @@ const addCalories = async props => {
       return false;
     }
   } catch (error) {
-    console.log('Error' + error);
     alert(error.message);
   }
 };
@@ -141,7 +136,6 @@ const findFood = async props => {
     );
     return response.data.result;
   } catch (error) {
-    console.log('Error' + error);
     alert(error.message);
   }
 };
@@ -339,17 +333,19 @@ const currentWeekPercentage = async props => {
   }
 };
 const workoutGerneration = async props => {
+  console.log(props[1].intensity);
+  console.log(props[4].muscle);
+  console.log(props[0].type);
   try {
     const response = await axios.post(
       `http://${ip}:3000/api/workoutbuilderRoutes/generateWorkout`,
       {
         token: token,
-        trainingIntensity: props.intensity,
-        targetMuscle: props.muscle,
-        trainingType: props.type,
+        trainingIntensity: props[1].intensity,
+        targetMuscle: props[4].muscle,
+        trainingType: props[0].type,
       },
     );
-    // console.log(response.data.reasult)
 
     return response.data;
   } catch (error) {

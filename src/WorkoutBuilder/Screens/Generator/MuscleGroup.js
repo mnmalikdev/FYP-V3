@@ -48,10 +48,25 @@ const MuscleGroup = ({navigation, route}) => {
             <TouchableOpacity
               onPress={async () => {
                 setMuscle(item);
-                const a = await workoutGerneration(...prevParams, {
-                  muscle: item,
-                });
-                console.log(a);
+                // navigation.push('Workout', [
+                //   {
+                //     ...prevParams,
+                //     muscle: item,
+                //   },
+                // ]);
+                const a = await workoutGerneration([
+                  ...prevParams,
+                  {
+                    muscle: item,
+                  },
+                ]);
+
+                if (a.status == 'success') {
+                  alert('added successfully');
+                  navigation.navigate('Workout', a.message[0].exercises);
+                } else {
+                  alert("can't add");
+                }
               }}>
               <Text style={styles.choice}>{item}</Text>
             </TouchableOpacity>
