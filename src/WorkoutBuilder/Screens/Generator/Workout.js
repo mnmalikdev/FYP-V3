@@ -47,7 +47,7 @@ const Workout = ({navigation, route}) => {
         <ScrollView style={Styles.scrollableContainer}>
           {selectedItems.map(item => {
             return (
-              <DataTable.Row key={item.key}>
+              <DataTable.Row key={item._id}>
                 <DataTable.Cell>
                   <Text style={{color: '#E0E0E0', fontSize: 13}}>
                     {item.name}
@@ -77,8 +77,9 @@ const Workout = ({navigation, route}) => {
         </ScrollView>
       </DataTable>
       <TouchableOpacity
-        onPress={() => {
-          LogWorkout(selectedItems);
+        onPress={async () => {
+          console.log(selectedItems[0]);
+          // await LogWorkout(selectedItems);
         }}>
         <Text style={Styles.button}>Log Workout</Text>
       </TouchableOpacity>

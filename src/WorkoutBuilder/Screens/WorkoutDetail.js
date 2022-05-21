@@ -9,7 +9,9 @@ import {
 } from 'react-native';
 import {DataTable} from 'react-native-paper';
 
-const WorkoutDetail = ({navigation}) => {
+const WorkoutDetail = ({navigation, route}) => {
+  const prevParams = route.params;
+  console.log(prevParams);
   const dataDummy = [
     {
       key: 1,
@@ -44,15 +46,15 @@ const WorkoutDetail = ({navigation}) => {
           </DataTable.Title>
         </DataTable.Header>
         <ScrollView style={Styles.scrollableContainer}>
-          {dataDummy.map(item => {
+          {prevParams.map(item => {
             return (
-              <DataTable.Row key={item.key}>
+              <DataTable.Row key={item._id}>
                 <DataTable.Cell>
                   <Text
                     style={{
                       color: '#E0E0E0',
                     }}>
-                    {item.exercise}
+                    {item.name}
                   </Text>
                 </DataTable.Cell>
                 <DataTable.Cell numeric>

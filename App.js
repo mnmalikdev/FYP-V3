@@ -43,7 +43,7 @@ const App = () => {
         <Stack.Navigator screenOptions={{headerShown: false}}>
           {/* <Stack.Screen name="helpSupport" component={helpSupport} /> */}
           {/* <Stack.Screen name="WelcomePage" component={index} /> */}
-          <Stack.Screen name="WorkoutDetail" component={WorkoutDetail} />
+
           <Stack.Screen name="WorkoutDashboard" component={WorkoutDashboard} />
           <Stack.Screen name="MoreInfo" component={MoreInfo} />
           <Stack.Screen name="MuscleGroup" component={MuscleGroup} />
@@ -51,7 +51,7 @@ const App = () => {
           <Stack.Screen name="CreateWorkout" component={CreateWorkout} />
           {/* <Stack.Screen name="MoreInfo" component={MoreInfo} /> */}
 
-          {/* <Stack.Screen name="WorkoutDetail" component={WorkoutDetail} /> */}
+          <Stack.Screen name="WorkoutDetail" component={WorkoutDetail} />
           <Stack.Screen name="Plans" component={Plans} />
           <Stack.Screen name="TrainingType" component={TrainingType} />
           <Stack.Screen name="Logger" component={Logger} />

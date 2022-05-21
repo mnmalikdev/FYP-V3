@@ -333,9 +333,6 @@ const currentWeekPercentage = async props => {
   }
 };
 const workoutGerneration = async props => {
-  console.log(props[1].intensity);
-  console.log(props[4].muscle);
-  console.log(props[0].type);
   try {
     const response = await axios.post(
       `http://${ip}:3000/api/workoutbuilderRoutes/generateWorkout`,
@@ -353,7 +350,20 @@ const workoutGerneration = async props => {
   }
 };
 const LogWorkout = async props => {
-  console.log(props);
+  console.log('============================');
+  console.log(props[0]);
+  // try {
+  //   const response = await axios.post(
+  //     `http://${ip}:3000/api/workoutbuilderRoutes/logWorkout`,
+  //     {
+  //       token: token,
+  //     },
+  //   );
+
+  //   return response.data;
+  // } catch (error) {
+  //   alert(error.message);
+  // }
 };
 const getWorkout = async props => {
   try {
@@ -363,7 +373,22 @@ const getWorkout = async props => {
         token: token,
       },
     );
-    console.log(response.data);
+
+    return response.data;
+  } catch (error) {
+    alert(error.message);
+  }
+};
+
+const plansCard = async props => {
+  try {
+    const response = await axios.post(
+      `http://${ip}:3000/api/workoutbuilderRoutes/plansCard`,
+      {
+        token: token,
+      },
+    );
+
     return response.data;
   } catch (error) {
     alert(error.message);
@@ -376,6 +401,7 @@ export const DataProvider = ({children}) => {
     <DataContext.Provider
       value={{
         signin,
+        plansCard,
         workoutGerneration,
         logout,
         getWorkout,
