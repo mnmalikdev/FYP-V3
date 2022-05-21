@@ -26,6 +26,7 @@ import login from './src/Login/Screen/login';
 import resetPassword from './src/Login/Screen/resetPassword';
 import CreateWorkout from './src/WorkoutBuilder/Screens/CreateWorkout';
 import MoreInfo from './src/WorkoutBuilder/Screens/Generator/MoreInfo';
+import MuscleGroup from './src/WorkoutBuilder/Screens/Generator/MuscleGroup';
 import TrainingType from './src/WorkoutBuilder/Screens/Generator/TrainingType';
 import Workout from './src/WorkoutBuilder/Screens/Generator/Workout';
 import Logger from './src/WorkoutBuilder/Screens/Logger';
@@ -42,10 +43,10 @@ const App = () => {
         <Stack.Navigator screenOptions={{headerShown: false}}>
           {/* <Stack.Screen name="helpSupport" component={helpSupport} /> */}
           {/* <Stack.Screen name="WelcomePage" component={index} /> */}
-          <Stack.Screen name="MoreInfo" component={MoreInfo} />
-          <Stack.Screen name="Workout" component={Workout} />
-
           <Stack.Screen name="WorkoutDashboard" component={WorkoutDashboard} />
+          <Stack.Screen name="MoreInfo" component={MoreInfo} />
+          <Stack.Screen name="MuscleGroup" component={MuscleGroup} />
+          <Stack.Screen name="Workout" component={Workout} />
           <Stack.Screen name="CreateWorkout" component={CreateWorkout} />
           {/* <Stack.Screen name="MoreInfo" component={MoreInfo} /> */}
 

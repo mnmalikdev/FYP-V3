@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Image,
   ScrollView,
@@ -8,7 +8,170 @@ import {
   View,
 } from 'react-native';
 
-const TrainingType = ({navigation, route}) => {
+const TrainingType = ({navigation}) => {
+  // build state for each training type
+  const [type, selectType] = useState('null');
+  const [BodyBuilding, selectBodyBuilding] = useState({
+    padding: 12,
+    borderColor: '#0070ff',
+    borderWidth: 1,
+    borderRadius: 10,
+    marginLeft: 5,
+    marginRight: 5,
+    marginTop: 10,
+    shadowColor: '#0070ff',
+    backgroundColor: '#000000',
+  });
+  const [PowerLifting, selectPowerLifting] = useState({
+    padding: 12,
+    borderColor: '#0070ff',
+    borderWidth: 1,
+    borderRadius: 10,
+    marginLeft: 5,
+    marginRight: 5,
+    marginTop: 10,
+    shadowColor: '#0070ff',
+    backgroundColor: '#000000',
+  });
+  const [CrossFit, selectCrossFit] = useState({
+    padding: 12,
+    borderColor: '#0070ff',
+    borderWidth: 1,
+    borderRadius: 10,
+    marginLeft: 5,
+    marginRight: 5,
+    marginTop: 10,
+    shadowColor: '#0070ff',
+    backgroundColor: '#000000',
+  });
+  const [BodyWeight, selectBodyWeight] = useState({
+    padding: 12,
+    borderColor: '#0070ff',
+    borderWidth: 1,
+    borderRadius: 10,
+    marginLeft: 5,
+    marginRight: 5,
+    marginTop: 10,
+    shadowColor: '#0070ff',
+    backgroundColor: '#000000',
+  });
+
+  // a function that sets state based on selectedType and sets color as #0070ff on press
+  const selectTypeHandler = type => {
+    if (type === 'BodyBuilding') {
+      //  -------------choice 1 ----------------------
+      selectBodyBuilding({
+        padding: 12,
+        borderColor: '#0070ff',
+        borderWidth: 1,
+        borderRadius: 10,
+        marginLeft: 5,
+        marginRight: 5,
+        marginTop: 10,
+        shadowColor: '#0070ff',
+        backgroundColor: '#0070ff',
+      });
+    } else {
+      // default button style
+      selectBodyBuilding({
+        padding: 12,
+        borderColor: '#0070ff',
+        borderWidth: 1,
+        borderRadius: 10,
+        marginLeft: 5,
+        marginRight: 5,
+        marginTop: 10,
+        shadowColor: '#0070ff',
+        backgroundColor: 'black',
+      });
+    }
+    // -------------choice 2 ----------------------
+    if (type === 'PowerLifting') {
+      selectPowerLifting({
+        padding: 12,
+        borderColor: '#0070ff',
+        borderWidth: 1,
+        borderRadius: 10,
+        marginLeft: 5,
+        marginRight: 5,
+        marginTop: 10,
+        shadowColor: '#0070ff',
+        backgroundColor: '#0070ff',
+      });
+    } else {
+      // default button style
+      selectPowerLifting({
+        padding: 12,
+        borderColor: '#0070ff',
+        borderWidth: 1,
+        borderRadius: 10,
+        marginLeft: 5,
+        marginRight: 5,
+        marginTop: 10,
+        shadowColor: '#0070ff',
+        backgroundColor: 'black',
+      });
+    }
+    // -------------choice 3 ----------------------
+    if (type === 'CrossFit') {
+      selectCrossFit({
+        padding: 12,
+        borderColor: '#0070ff',
+        borderWidth: 1,
+        borderRadius: 10,
+        marginLeft: 5,
+        marginRight: 5,
+        marginTop: 10,
+        shadowColor: '#0070ff',
+        backgroundColor: '#0070ff',
+      });
+    } else {
+      // default button style
+      selectCrossFit({
+        padding: 12,
+        borderColor: '#0070ff',
+        borderWidth: 1,
+        borderRadius: 10,
+        marginLeft: 5,
+        marginRight: 5,
+        marginTop: 10,
+        shadowColor: '#0070ff',
+        backgroundColor: 'black',
+      });
+    }
+    // -------------choice 4 ----------------------
+    if (type === 'BodyWeight') {
+      selectBodyWeight({
+        padding: 12,
+        borderColor: '#0070ff',
+        borderWidth: 1,
+        borderRadius: 10,
+        marginLeft: 5,
+        marginRight: 5,
+        marginTop: 10,
+        shadowColor: '#0070ff',
+        backgroundColor: '#0070ff',
+      });
+    } else {
+      // default button style
+      selectBodyWeight({
+        padding: 12,
+        borderColor: '#0070ff',
+        borderWidth: 1,
+        borderRadius: 10,
+        marginLeft: 5,
+        marginRight: 5,
+        marginTop: 10,
+        shadowColor: '#0070ff',
+        backgroundColor: 'black',
+      });
+    }
+    // set state for selectedType
+    // selectType(type);
+  };
+
+  // _____________component code
+
   return (
     <View style={Styles.container}>
       <ScrollView>
@@ -23,7 +186,12 @@ const TrainingType = ({navigation, route}) => {
         </Text>
         <View styles={Styles.choiceContainer}>
           {/* choice one-BodyBuilding */}
-          <TouchableOpacity style={Styles.choice}>
+          <TouchableOpacity
+            style={BodyBuilding}
+            onPress={() => {
+              selectTypeHandler('BodyBuilding');
+              selectType('BodyBuilding');
+            }}>
             <Text style={Styles.choiceTitle}>Body Building</Text>
             <View
               style={{
@@ -42,7 +210,12 @@ const TrainingType = ({navigation, route}) => {
             </View>
           </TouchableOpacity>
           {/* choice two-powerLifting */}
-          <TouchableOpacity style={Styles.choice}>
+          <TouchableOpacity
+            style={PowerLifting}
+            onPress={() => {
+              selectTypeHandler('PowerLifting');
+              selectType('PowerLifting');
+            }}>
             <Text style={Styles.choiceTitle}>Power Lifting</Text>
             <View
               style={{
@@ -61,7 +234,12 @@ const TrainingType = ({navigation, route}) => {
             </View>
           </TouchableOpacity>
           {/* choice three-Crossfit */}
-          <TouchableOpacity style={Styles.choice}>
+          <TouchableOpacity
+            style={CrossFit}
+            onPress={() => {
+              selectTypeHandler('CrossFit');
+              selectType('CrossFit');
+            }}>
             <Text style={Styles.choiceTitle}>Cross Fit</Text>
             <View
               style={{
@@ -78,7 +256,12 @@ const TrainingType = ({navigation, route}) => {
               />
             </View>
           </TouchableOpacity>
-          <TouchableOpacity style={Styles.choice}>
+          <TouchableOpacity
+            style={BodyWeight}
+            onPress={() => {
+              selectTypeHandler('BodyWeight');
+              selectType('BodyWeight');
+            }}>
             <Text style={Styles.choiceTitle}>Body Weight</Text>
             <View
               style={{
@@ -102,7 +285,13 @@ const TrainingType = ({navigation, route}) => {
       <TouchableOpacity
         style={Styles.button}
         onPress={() => {
-          navigation.navigate('MoreInfo');
+          if (type === 'null') {
+            alert('Please select a Workout Type ');
+          } else {
+            // naviagate to push screen and also pass the type
+            navigation.push('MoreInfo', [{type}]);
+            console.log({type});
+          }
         }}>
         <Text
           style={{
@@ -129,17 +318,6 @@ const Styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  choice: {
-    padding: 12,
-    borderColor: '#0070ff',
-    borderWidth: 1,
-    borderRadius: 10,
-    marginLeft: 5,
-    marginRight: 5,
-    marginTop: 10,
-    shadowColor: '#0070ff',
-    backgroundColor: 'black',
-  },
   choiceTitle: {
     fontSize: 20,
     color: 'white',
@@ -150,7 +328,6 @@ const Styles = StyleSheet.create({
     width: '70%',
     fontSize: 15,
     color: 'white',
-
     marginTop: 2,
     lineHeight: 20,
   },

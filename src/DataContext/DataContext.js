@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
-import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+import React from 'react';
 
 const ip = '172.25.144.1';
 var token = '';
@@ -42,7 +42,7 @@ const signin = async props => {
     try {
       await AsyncStorage.setItem('Token', response.data.token);
     } catch (error) {
-     alert(error);
+      alert(error);
     }
     if (response.data.status === 'success') {
       return true;
@@ -280,7 +280,7 @@ const weeklyCheckIn = async props => {
     alert(error.message);
   }
 };
-const currentCalories= async props => {
+const currentCalories = async props => {
   try {
     const response = await axios.post(
       `http://${ip}:3000/api/coachingRoute/currentWeek`,
@@ -293,8 +293,8 @@ const currentCalories= async props => {
     console.log(error);
     alert(error.message);
   }
-}
-const initialCoaching =async props => {
+};
+const initialCoaching = async props => {
   try {
     const response = await axios.post(
       `http://${ip}:3000/api/coachingRoute/initialCoaching`,
@@ -307,8 +307,8 @@ const initialCoaching =async props => {
     console.log(error);
     alert(error.message);
   }
-}
-const todayDiaryDetail=async props => {
+};
+const todayDiaryDetail = async props => {
   try {
     const response = await axios.post(
       `http://${ip}:3000/api/meal/getTodayMeals`,
@@ -322,14 +322,14 @@ const todayDiaryDetail=async props => {
   } catch (error) {
     alert(error.message);
   }
-}
-const currentWeekPercentage=async props => {
+};
+const currentWeekPercentage = async props => {
   try {
     const response = await axios.post(
       `http://${ip}:3000/api/coachingRoute/currentWeekPercentage`,
       {
         token: token,
-      }, 
+      },
     );
     // console.log(response.data.reasult)
 
@@ -337,13 +337,32 @@ const currentWeekPercentage=async props => {
   } catch (error) {
     alert(error.message);
   }
-}
+};
+const workoutGerneration = async props => {
+  try {
+    const response = await axios.post(
+      `http://${ip}:3000/api/workoutbuilderRoutes/generateWorkout`,
+      {
+        token: token,
+        trainingIntensity: props.intensity,
+        targetMuscle: props.muscle,
+        trainingType: props.type,
+      },
+    );
+    // console.log(response.data.reasult)
+
+    return response.data;
+  } catch (error) {
+    alert(error.message);
+  }
+};
 const DataContext = React.createContext();
 export const DataProvider = ({children}) => {
   return (
     <DataContext.Provider
       value={{
         signin,
+        workoutGerneration,
         logout,
         initialCoaching,
         signup,
@@ -367,7 +386,6 @@ export const DataProvider = ({children}) => {
       {children}
     </DataContext.Provider>
   );
-}; 
+};
 
 export default DataContext;
- 

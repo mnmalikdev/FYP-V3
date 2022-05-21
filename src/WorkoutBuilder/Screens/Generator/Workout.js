@@ -2,6 +2,9 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
 const Workout = ({navigation, route}) => {
+  // store params
+  const selectedItems = route.params;
+  console.log(selectedItems);
   return (
     <View style={Styles.container}>
       <Text
@@ -11,7 +14,7 @@ const Workout = ({navigation, route}) => {
           color: '#E0E0E0',
           textTransform: 'uppercase',
         }}>
-        Choose a targeted Muscle you want to hit !
+        something
       </Text>
     </View>
   );

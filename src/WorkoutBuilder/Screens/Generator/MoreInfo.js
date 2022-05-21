@@ -1,8 +1,28 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import CircularPicker from 'react-native-circular-picker';
 import {Slider} from 'react-native-elements';
 const MoreInfo = ({navigation, route}) => {
+  // forcefullyRerender
+
+  const [sleep, setSleep] = useState(4);
+  const [trainingDays, setTrainingDays] = useState();
+  const [intensityValue, setIntensityValue] = useState(0);
+  const [intensity, setIntensity] = useState('');
+  // handleIntensity function to handle the intensity slider
+  const handleIntensity = val => {
+    setIntensityValue(val);
+    if (intensityValue <= 22) {
+      setIntensity('Mild');
+    } else if (intensityValue > 40 && intensityValue <= 66) {
+      setIntensity('Moderate');
+    } else if (intensityValue > 67) {
+      setIntensity('Intense');
+    }
+  };
+  // store params in a variable
+  const prevParams = route.params;
+
   return (
     <View style={styles.container}>
       <Text
@@ -23,12 +43,12 @@ const MoreInfo = ({navigation, route}) => {
           marginTop: 20,
           textAlign: 'center',
         }}>
-        Number of Training Days/week:# days
+        Number of Training Days/week:{trainingDays}
       </Text>
 
       <Slider
         style={styles.slider}
-        // value={2} {set state value here}
+        value={trainingDays}
         step={1}
         minimumValue={1}
         maximumValue={7}
@@ -36,7 +56,9 @@ const MoreInfo = ({navigation, route}) => {
         minimumTrackTintColor="#0070ff"
         maximumTrackTintColor="#0070ff"
         thumbTintColor="white"
+        onValueChange={days => setTrainingDays(days)}
       />
+
       <Text
         style={{
           fontSize: 18,
@@ -45,18 +67,18 @@ const MoreInfo = ({navigation, route}) => {
           marginTop: 20,
           textAlign: 'center',
         }}>
-        Number of Hours you sleep:# hours
+        How many hours of sleep : {sleep}
       </Text>
       <Slider
         style={styles.slider}
-        // value={2} {set state value here}
+        value={sleep}
         step={1}
         minimumValue={1}
         maximumValue={12}
-        onValueChange={value => console.log(value)}
         minimumTrackTintColor="#0070ff"
         maximumTrackTintColor="#0070ff"
         thumbTintColor="white"
+        onValueChange={value => setSleep(value)}
       />
       {/* CIRCULAT SLIDER-INTENSITY */}
       <Text
@@ -83,12 +105,14 @@ const MoreInfo = ({navigation, route}) => {
         <CircularPicker
           size={250}
           steps={[15, 40, 70, 100]}
+          strokeWidth={20}
           gradients={{
             0: ['rgb(255, 97, 99)', 'rgb(247, 129, 119)'],
             15: ['rgb(255, 204, 0)', 'rgb(255, 214, 10)'],
             40: ['rgb(52, 199, 89)', 'rgb(48, 209, 88)'],
             70: ['rgb(0, 122, 255)', 'rgb(10, 132, 255)'],
-          }}>
+          }}
+          onChange={handleIntensity}>
           <>
             <Text
               style={{
@@ -97,15 +121,24 @@ const MoreInfo = ({navigation, route}) => {
                 marginBottom: 8,
                 color: '#E0E0E0',
               }}>
-              Suggested Intensity.
+              Intensity.
             </Text>
             <Text style={{textAlign: 'center', color: '#E0E0E0'}}>
-              Moderate
+              {intensity}
             </Text>
           </>
         </CircularPicker>
       </View>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        onPress={() =>
+          navigation.push('MuscleGroup', [
+            ...prevParams,
+            {intensity: intensity},
+            {sleep: sleep},
+            {trainingDays: trainingDays},
+          ])
+        }
+        style={styles.button}>
         <Text
           style={{
             fontSize: 20,
@@ -137,8 +170,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   button: {
-    marginTop: 16,
-    marginBottom: 18,
+    // fix this buttom to bottom of page
+    marginTop: 26,
+    marginBottom: 5,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#0070ff',
