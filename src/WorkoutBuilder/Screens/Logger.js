@@ -1,7 +1,15 @@
-import React, {useRef, useState} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React, {useContext, useEffect, useRef, useState} from 'react';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {DataTable} from 'react-native-paper';
 import Plus from 'react-native-vector-icons/dist/FontAwesome';
 import Icon from 'react-native-vector-icons/Entypo';
+import DataContext from '../../DataContext/DataContext';
 import {homeStyle as styles} from './testStyles';
 
 // get pureComponent
@@ -9,86 +17,412 @@ import {homeStyle as styles} from './testStyles';
 const Logger = props => {
   const navigation = props.navigation;
   const route = props.route;
-  // -----------Ftn code for importing DAata------------------------------
-  //  total()
-  // const selectedItems = props.route.params ? props.route.params[0] : '';
-  // const RPE = props.route.params ? props.route.params[1] : '';
-  // const reps = props.route.params ? props.route.params[2] : '';
-  // const sets = props.route.params ? props.route.params[3] : '';
-
-  // var total = Array(selectedItems.length);
-
-  // for (var i = 0; i < selectedItems.length; i++) {
-  //   total[i] = {
-  //     id: selectedItems[i].id,
-  //     item: selectedItems[i].item,
-  //     sets: sets[i],
-  //     reps: reps[i],
-  //     RPE: RPE[i],
-  //   };
-  // }
-
-  // join selectedItems and Volume into one array of objects
-  const total = [
+  const [total, setTotal] = useState([
     [
-      {RPE: '3', id: '0001', item: '3/4 sit-up', reps: '2', sets: '1'},
-      {RPE: '6', id: '0002', item: '45° side bend', reps: '5', sets: '4'},
-      {RPE: '9', id: '0003', item: 'air bike', reps: '8', sets: '7'},
+      {
+        name: 'Incline Barbell Bench Press',
+        sets: 3,
+        reps: 12,
+        _id: '6288d19c82585e5fdda9c489',
+      },
+      {
+        name: 'Flat Dumbbell Bench Press',
+        sets: 3,
+        reps: 15,
+        _id: '6288d19c82585e5fdda9c48a',
+      },
+      {
+        name: 'Cable Crossover',
+        sets: 3,
+        reps: 12,
+        _id: '6288d19c82585e5fdda9c48b',
+      },
+      {
+        name: 'Cable Crossover lower pec',
+        sets: 3,
+        reps: 12,
+        _id: '6288d19c82585e5fdda9c48c',
+      },
+      {
+        name: 'Dumbbell Fly',
+        sets: 3,
+        reps: 12,
+        _id: '6288d19c82585e5fdda9c48d',
+      },
+      {
+        name: 'Dumbbell Fly lower pec',
+        sets: 3,
+        reps: 12,
+        _id: '6288d19c82585e5fdda9c48e',
+      },
+      {
+        name: 'Dumbbell Fly upper pec',
+        sets: 3,
+        reps: 12,
+        _id: '6288d19c82585e5fdda9c48f',
+      },
+      {
+        name: 'Incline Barbell Bench Press',
+        sets: 3,
+        reps: 12,
+        _id: '6288d293596f93a13b3072cc',
+      },
+      {
+        name: 'Flat Dumbbell Bench Press',
+        sets: 3,
+        reps: 15,
+        _id: '6288d293596f93a13b3072cd',
+      },
+      {
+        name: 'Cable Crossover',
+        sets: 3,
+        reps: 12,
+        _id: '6288d293596f93a13b3072ce',
+      },
+      {
+        name: 'Cable Crossover lower pec',
+        sets: 3,
+        reps: 12,
+        _id: '6288d293596f93a13b3072cf',
+      },
+      {
+        name: 'Dumbbell Fly',
+        sets: 3,
+        reps: 12,
+        _id: '6288d293596f93a13b3072d0',
+      },
+      {
+        name: 'Dumbbell Fly lower pec',
+        sets: 3,
+        reps: 12,
+        _id: '6288d293596f93a13b3072d1',
+      },
+      {
+        name: 'Dumbbell Fly upper pec',
+        sets: 3,
+        reps: 12,
+        _id: '6288d293596f93a13b3072d2',
+      },
     ],
     [
-      {RPE: '4', id: '0001', item: '3/4 sit-up', reps: '2', sets: '1'},
-      {RPE: '6', id: '0002', item: '45° side bend', reps: '5', sets: '4'},
-      {RPE: '9', id: '0003', item: 'air bike', reps: '8', sets: '7'},
+      {
+        name: 'Incline Barbell Bench Press',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1a682585e5fdda9c494',
+      },
+      {
+        name: 'Flat Dumbbell Bench Press',
+        sets: 3,
+        reps: 15,
+        _id: '6288d1a682585e5fdda9c495',
+      },
+      {
+        name: 'Cable Crossover',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1a682585e5fdda9c496',
+      },
+      {
+        name: 'Cable Crossover lower pec',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1a682585e5fdda9c497',
+      },
+      {
+        name: 'Dumbbell Fly',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1a682585e5fdda9c498',
+      },
+      {
+        name: 'Dumbbell Fly lower pec',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1a682585e5fdda9c499',
+      },
+      {
+        name: 'Dumbbell Fly upper pec',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1a682585e5fdda9c49a',
+      },
     ],
-
     [
-      {RPE: '5', id: '0001', item: '3/4 sit-up', reps: '2', sets: '1'},
-      {RPE: '6', id: '0002', item: '45° side bend', reps: '5', sets: '4'},
-      {RPE: '9', id: '0003', item: 'air bike', reps: '8', sets: '7'},
+      {
+        name: 'Incline Barbell Bench Press',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1a882585e5fdda9c49f',
+      },
+      {
+        name: 'Flat Dumbbell Bench Press',
+        sets: 3,
+        reps: 15,
+        _id: '6288d1a882585e5fdda9c4a0',
+      },
+      {
+        name: 'Cable Crossover',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1a882585e5fdda9c4a1',
+      },
+      {
+        name: 'Cable Crossover lower pec',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1a882585e5fdda9c4a2',
+      },
+      {
+        name: 'Dumbbell Fly',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1a882585e5fdda9c4a3',
+      },
+      {
+        name: 'Dumbbell Fly lower pec',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1a882585e5fdda9c4a4',
+      },
+      {
+        name: 'Dumbbell Fly upper pec',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1a882585e5fdda9c4a5',
+      },
     ],
-
     [
-      {RPE: '6', id: '0001', item: '3/4 sit-up', reps: '2', sets: '1'},
-      {RPE: '6', id: '0002', item: '45° side bend', reps: '5', sets: '4'},
-      {RPE: '9', id: '0003', item: 'air bike', reps: '8', sets: '7'},
+      {
+        name: 'Incline Barbell Bench Press',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1a982585e5fdda9c4aa',
+      },
+      {
+        name: 'Flat Dumbbell Bench Press',
+        sets: 3,
+        reps: 15,
+        _id: '6288d1a982585e5fdda9c4ab',
+      },
+      {
+        name: 'Cable Crossover',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1a982585e5fdda9c4ac',
+      },
+      {
+        name: 'Cable Crossover lower pec',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1a982585e5fdda9c4ad',
+      },
+      {
+        name: 'Dumbbell Fly',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1a982585e5fdda9c4ae',
+      },
+      {
+        name: 'Dumbbell Fly lower pec',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1a982585e5fdda9c4af',
+      },
+      {
+        name: 'Dumbbell Fly upper pec',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1a982585e5fdda9c4b0',
+      },
     ],
-
     [
-      {RPE: '7', id: '0001', item: '3/4 sit-up', reps: '2', sets: '1'},
-      {RPE: '6', id: '0002', item: '45° side bend', reps: '5', sets: '4'},
-      {RPE: '9', id: '0003', item: 'air bike', reps: '8', sets: '7'},
+      {
+        name: 'Incline Barbell Bench Press',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1a982585e5fdda9c4b5',
+      },
+      {
+        name: 'Flat Dumbbell Bench Press',
+        sets: 3,
+        reps: 15,
+        _id: '6288d1a982585e5fdda9c4b6',
+      },
+      {
+        name: 'Cable Crossover',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1a982585e5fdda9c4b7',
+      },
+      {
+        name: 'Cable Crossover lower pec',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1a982585e5fdda9c4b8',
+      },
+      {
+        name: 'Dumbbell Fly',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1a982585e5fdda9c4b9',
+      },
+      {
+        name: 'Dumbbell Fly lower pec',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1a982585e5fdda9c4ba',
+      },
+      {
+        name: 'Dumbbell Fly upper pec',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1a982585e5fdda9c4bb',
+      },
     ],
-
     [
-      {RPE: '8', id: '0001', item: '3/4 sit-up', reps: '2', sets: '1'},
-      {RPE: '6', id: '0002', item: '45° side bend', reps: '5', sets: '4'},
-      {RPE: '9', id: '0003', item: 'air bike', reps: '8', sets: '7'},
+      {
+        name: 'Incline Barbell Bench Press',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1aa82585e5fdda9c4c0',
+      },
+      {
+        name: 'Flat Dumbbell Bench Press',
+        sets: 3,
+        reps: 15,
+        _id: '6288d1aa82585e5fdda9c4c1',
+      },
+      {
+        name: 'Cable Crossover',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1aa82585e5fdda9c4c2',
+      },
+      {
+        name: 'Cable Crossover lower pec',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1aa82585e5fdda9c4c3',
+      },
+      {
+        name: 'Dumbbell Fly',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1aa82585e5fdda9c4c4',
+      },
+      {
+        name: 'Dumbbell Fly lower pec',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1aa82585e5fdda9c4c5',
+      },
+      {
+        name: 'Dumbbell Fly upper pec',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1aa82585e5fdda9c4c6',
+      },
     ],
-
     [
-      {RPE: '8', id: '0001', item: '3/4 sit-up', reps: '2', sets: '1'},
-      {RPE: '6', id: '0002', item: '45° side bend', reps: '5', sets: '4'},
-      {RPE: '9', id: '0003', item: 'air bike', reps: '8', sets: '7'},
+      {
+        name: 'Incline Barbell Bench Press',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1ab82585e5fdda9c4cb',
+      },
+      {
+        name: 'Flat Dumbbell Bench Press',
+        sets: 3,
+        reps: 15,
+        _id: '6288d1ab82585e5fdda9c4cc',
+      },
+      {
+        name: 'Cable Crossover',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1ab82585e5fdda9c4cd',
+      },
+      {
+        name: 'Cable Crossover lower pec',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1ab82585e5fdda9c4ce',
+      },
+      {
+        name: 'Dumbbell Fly',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1ab82585e5fdda9c4cf',
+      },
+      {
+        name: 'Dumbbell Fly lower pec',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1ab82585e5fdda9c4d0',
+      },
+      {
+        name: 'Dumbbell Fly upper pec',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1ab82585e5fdda9c4d1',
+      },
     ],
-
     [
-      {RPE: '3', id: '0001', item: '3/4 sit-up', reps: '2', sets: '1'},
-      {RPE: '6', id: '0002', item: '45° side bend', reps: '5', sets: '4'},
-      {RPE: '9', id: '0003', item: 'air bike', reps: '8', sets: '7'},
+      {
+        name: 'Incline Barbell Bench Press',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1ab82585e5fdda9c4d6',
+      },
+      {
+        name: 'Flat Dumbbell Bench Press',
+        sets: 3,
+        reps: 15,
+        _id: '6288d1ab82585e5fdda9c4d7',
+      },
+      {
+        name: 'Cable Crossover',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1ab82585e5fdda9c4d8',
+      },
+      {
+        name: 'Cable Crossover lower pec',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1ab82585e5fdda9c4d9',
+      },
+      {
+        name: 'Dumbbell Fly',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1ab82585e5fdda9c4da',
+      },
+      {
+        name: 'Dumbbell Fly lower pec',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1ab82585e5fdda9c4db',
+      },
+      {
+        name: 'Dumbbell Fly upper pec',
+        sets: 3,
+        reps: 12,
+        _id: '6288d1ab82585e5fdda9c4dc',
+      },
     ],
+  ]);
+  console.log(total[0]);
+  const {getWorkout} = useContext(DataContext);
+  useEffect(() => {
+    async function fetchData() {
+      const a = await getWorkout();
 
-    [
-      {RPE: '3', id: '0001', item: '3/4 sit-up', reps: '2', sets: '1'},
-      {RPE: '6', id: '0002', item: '45° side bend', reps: '5', sets: '4'},
-      {RPE: '9', id: '0003', item: 'air bike', reps: '8', sets: '7'},
-    ],
-
-    [
-      {RPE: '3', id: '0001', item: '3/4 sit-up', reps: '2', sets: '1'},
-      {RPE: '6', id: '0002', item: '45° side bend', reps: '5', sets: '4'},
-      {RPE: '9', id: '0003', item: 'air bike', reps: '8', sets: '7'},
-    ],
-  ];
+      setTotal(a);
+    }
+    fetchData();
+  }, []);
   // console.log(total[2]);
   const [date, setDate] = useState(new Date());
   var displayDate = useRef(0);
@@ -104,13 +438,21 @@ const Logger = props => {
               setDate(dat);
             }
           }}>
-          <Icon name="arrow-left" size={32} color="black" />
+          <Icon name="arrow-left" size={32} color="#0070ff" />
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
             alert('hello');
           }}>
-          <Text>{date.toDateString()}</Text>
+          <Text
+            style={{
+              color: '#E0E0E0',
+              fontSize: 18,
+              marginBottom: 14,
+              marginTop: 14,
+            }}>
+            {date.toDateString()}
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
@@ -121,16 +463,132 @@ const Logger = props => {
               setDate(dat);
             }
           }}>
-          <Icon name="arrow-right" size={32} color="black" />
+          <Icon name="arrow-right" size={32} color="#0070ff" />
         </TouchableOpacity>
       </View>
       {displayDate.current === 0 ? (
         <View style={styles.dynamic}>
-          <Text>Today</Text>
+          <DataTable>
+            <DataTable.Header>
+              <DataTable.Title>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    fontWeight: 'bold',
+                    color: '#E0E0E0',
+                  }}>
+                  Exercise
+                </Text>
+              </DataTable.Title>
+              <DataTable.Title>
+                {' '}
+                <Text
+                  style={{
+                    fontSize: 20,
+                    fontWeight: 'bold',
+                    color: '#E0E0E0',
+                  }}>
+                  Sets
+                </Text>
+              </DataTable.Title>
+              <DataTable.Title>
+                {' '}
+                <Text
+                  style={{
+                    fontSize: 20,
+                    fontWeight: 'bold',
+                    color: '#E0E0E0',
+                  }}>
+                  Reps
+                </Text>
+              </DataTable.Title>
+            </DataTable.Header>
+            <ScrollView style={styles.scrollContainer}>
+              {total[0].map(item => (
+                <DataTable.Row key={item._id}>
+                  <DataTable.Cell>
+                    <Text style={{color: '#E0E0E0', textAlign: 'center'}}>
+                      {item.name}
+                    </Text>
+                  </DataTable.Cell>
+                  <DataTable.Cell>
+                    <Text style={{color: '#E0E0E0', textAlign: 'center'}}>
+                      {item.sets}
+                    </Text>
+                  </DataTable.Cell>
+                  <DataTable.Cell>
+                    <Text style={{color: '#E0E0E0', textAlign: 'center'}}>
+                      {item.reps}
+                    </Text>
+                  </DataTable.Cell>
+                </DataTable.Row>
+              ))}
+            </ScrollView>
+          </DataTable>
         </View>
       ) : (
-        <Text>{total[displayDate.current][0].RPE}</Text>
+        <View style={styles.dynamic}>
+          <DataTable>
+            <DataTable.Header>
+              <DataTable.Title>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    fontWeight: 'bold',
+                    color: '#E0E0E0',
+                  }}>
+                  Exercise
+                </Text>
+              </DataTable.Title>
+              <DataTable.Title>
+                {' '}
+                <Text
+                  style={{
+                    fontSize: 20,
+                    fontWeight: 'bold',
+                    color: '#E0E0E0',
+                  }}>
+                  Sets
+                </Text>
+              </DataTable.Title>
+              <DataTable.Title>
+                {' '}
+                <Text
+                  style={{
+                    fontSize: 20,
+                    fontWeight: 'bold',
+                    color: '#E0E0E0',
+                  }}>
+                  Reps
+                </Text>
+              </DataTable.Title>
+            </DataTable.Header>
+            <ScrollView style={styles.scrollContainer}>
+              {total[displayDate.current].map(item => (
+                <DataTable.Row key={item._id}>
+                  <DataTable.Cell>
+                    <Text style={{color: '#E0E0E0', textAlign: 'center'}}>
+                      {item.name}
+                    </Text>
+                  </DataTable.Cell>
+                  <DataTable.Cell>
+                    <Text style={{color: '#E0E0E0', textAlign: 'center'}}>
+                      {item.sets}
+                    </Text>
+                  </DataTable.Cell>
+                  <DataTable.Cell>
+                    <Text style={{color: '#E0E0E0', textAlign: 'center'}}>
+                      {item.reps}
+                    </Text>
+                  </DataTable.Cell>
+                </DataTable.Row>
+              ))}
+            </ScrollView>
+          </DataTable>
+        </View>
       )}
+
+      {/* use data table from react native paper */}
 
       <TouchableOpacity
         style={Styles.roundButton}
@@ -147,7 +605,7 @@ const Logger = props => {
 const Styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffff',
+    backgroundColor: 'black',
   },
   roundButton: {
     backgroundColor: '#0070ff',
@@ -167,6 +625,11 @@ const Styles = StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 2,
     elevation: 1,
+  },
+  scrollContainer: {
+    flex: 1,
+    marginTop: 10,
+    justifyContent: 'space-between',
   },
 });
 export default Logger;

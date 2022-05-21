@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   Dimensions,
   ScrollView,
@@ -8,21 +8,15 @@ import {
   View,
 } from 'react-native';
 import {DataTable} from 'react-native-paper';
+import DataContext from '../../../DataContext/DataContext';
+
 const Workout = ({navigation, route}) => {
+  const {LogWorkout} = useContext(DataContext);
+
   const prevParams = route.params;
 
-  const dataDummy = [
-    {
-      key: 1,
-      exercise: 'Squat',
-      sets: 3,
-      reps: 5,
-      RPE: `80%`,
-    },
-  ];
   // store params
   const selectedItems = route.params;
-  console.log(selectedItems);
 
   return (
     <View style={Styles.container}>
@@ -82,7 +76,10 @@ const Workout = ({navigation, route}) => {
           })}
         </ScrollView>
       </DataTable>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          LogWorkout(selectedItems);
+        }}>
         <Text style={Styles.button}>Log Workout</Text>
       </TouchableOpacity>
     </View>

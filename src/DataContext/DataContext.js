@@ -352,6 +352,24 @@ const workoutGerneration = async props => {
     alert(error.message);
   }
 };
+const LogWorkout = async props => {
+  console.log(props);
+};
+const getWorkout = async props => {
+  try {
+    const response = await axios.post(
+      `http://${ip}:3000/api/workoutbuilderRoutes/getWorkout`,
+      {
+        token: token,
+      },
+    );
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    alert(error.message);
+  }
+};
+
 const DataContext = React.createContext();
 export const DataProvider = ({children}) => {
   return (
@@ -360,6 +378,7 @@ export const DataProvider = ({children}) => {
         signin,
         workoutGerneration,
         logout,
+        getWorkout,
         initialCoaching,
         signup,
         currentCalories,
@@ -378,6 +397,7 @@ export const DataProvider = ({children}) => {
         autoLogin,
         previousCalories,
         weeklyCheckIn,
+        LogWorkout,
       }}>
       {children}
     </DataContext.Provider>

@@ -5,7 +5,6 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import {DataTable} from 'react-native-paper';
@@ -34,27 +33,39 @@ const WorkoutDetail = ({navigation}) => {
       </View>
       <DataTable>
         <DataTable.Header>
-          <DataTable.Title>Exercise</DataTable.Title>
-          <DataTable.Title numeric>Sets</DataTable.Title>
-          <DataTable.Title numeric>Reps</DataTable.Title>
-          <DataTable.Title numeric>RPE</DataTable.Title>
+          <DataTable.Title>
+            <Text style={{color: '#E0E0E0'}}>Exercise</Text>
+          </DataTable.Title>
+          <DataTable.Title numeric>
+            <Text style={{color: '#E0E0E0'}}>Sets</Text>
+          </DataTable.Title>
+          <DataTable.Title numeric>
+            <Text style={{color: '#E0E0E0'}}>Reps</Text>
+          </DataTable.Title>
         </DataTable.Header>
         <ScrollView style={Styles.scrollableContainer}>
           {dataDummy.map(item => {
             return (
               <DataTable.Row key={item.key}>
-                <DataTable.Cell>{item.exercise}</DataTable.Cell>
-                <DataTable.Cell numeric>{item.sets}</DataTable.Cell>
-                <DataTable.Cell numeric>{item.reps}</DataTable.Cell>
-                <DataTable.Cell numeric>{item.RPE}</DataTable.Cell>
+                <DataTable.Cell>
+                  <Text
+                    style={{
+                      color: '#E0E0E0',
+                    }}>
+                    {item.exercise}
+                  </Text>
+                </DataTable.Cell>
+                <DataTable.Cell numeric>
+                  <Text style={{color: '#E0E0E0'}}>{item.sets}</Text>
+                </DataTable.Cell>
+                <DataTable.Cell numeric>
+                  <Text style={{color: '#E0E0E0'}}>{item.reps}</Text>
+                </DataTable.Cell>
               </DataTable.Row>
             );
           })}
         </ScrollView>
       </DataTable>
-      <TouchableOpacity>
-        <Text style={Styles.button}>Log Workout</Text>
-      </TouchableOpacity>
     </View>
   );
 };
@@ -62,17 +73,17 @@ const WorkoutDetail = ({navigation}) => {
 const Styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffff',
+    backgroundColor: 'black',
   },
   Title: {
     fontSize: 32,
-    color: '#000000',
+    color: '#E0E0E0',
     fontWeight: 'bold',
     marginLeft: 13,
   },
   secondaryTitle: {
     fontSize: 18,
-    color: '#000000',
+    color: '#E0E0E0',
     padding: 13,
   },
   HeroImage: {
@@ -91,7 +102,7 @@ const Styles = StyleSheet.create({
   button: {
     fontSize: 20,
     color: '#ffffff',
-    backgroundColor: '#000000',
+    backgroundColor: '#0070ff',
     padding: 10,
     marginTop: 10,
     marginLeft: 10,
